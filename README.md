@@ -14,13 +14,9 @@
   𝚏𝚣𝚏𝙻𝚊𝚞𝚗𝚌𝚑𝚎𝚛
 </h1>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0;">
-  <iframe 
-    src="https://youtu.be/59FWX5HcL70" 
-    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-    frameborder="0" allowfullscreen>
-  </iframe>
-</div>
+
+[![Watch the video](https://img.youtube.com/vi/59FWX5HcL70/maxresdefault.jpg)](https://www.youtube.com/watch?v=59FWX5HcL70)
+
 
 ---
 
