@@ -475,7 +475,7 @@ apps_entries() {
 
     # Find .desktop files in the configured app dirs.
     for d in ${FZFLAUNCHER_APP_DIRS//:/ }; do
-      [[ -d "$d" ]] && find "$d" -maxdepth 1 -type f -name "*.desktop"
+      [[ -d "$d" ]] && find -L "$d" -maxdepth 1 -type f -name "*.desktop"
     done \
       | while IFS= read -r desk; do
           local id name exec

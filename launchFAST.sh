@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-kitty --title "fzfLauncher" -e fish -c '~/.config/fzfLauncher/fzfLauncher.sh --mode notcb'
+kitty --title "fzfLauncher" -e fish -c '~/.config/fzfLauncher/fzfLauncher.sh --mode notcb --hist-limit 100 '

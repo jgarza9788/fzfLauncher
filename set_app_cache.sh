@@ -26,7 +26,7 @@ have() {
 create_temp() {
   for d in "${dir_array[@]}"; do
     [[ -d "$d" ]] || continue
-    find "$d" -maxdepth 1 -type f -name "*.desktop"
+    find -L "$d" -maxdepth 1 -type f -name "*.desktop"
   done \
   | while IFS= read -r desk; do
       id="$(basename "$desk" .desktop)"
