@@ -1,6 +1,7 @@
 
 dirs=$1
 app_cache=$2
+terminal=$3
 
 
 # if (( $(date +%s) - $(stat -c %Y "$app_cache") > 10 )); then
@@ -35,6 +36,9 @@ create_temp() {
 
       exec="$(grep -m1 -E '^Exec=' "$desk" | sed 's/^Exec=//' || true)"
       exec="$(printf '%s' "$exec" | sed -E 's/ *%[fFuUdDnNickvm]//g')"
+
+      isTerm="$(grep -m1 -E '^Terminal=' "$desk" | sed 's/^Terminal=//' || false)"
+      [[ $isTerm == "true" ]] && exec="$terminal -e $exec"
 
       printf '%s\t%s\n' "$name" "$exec"
     done \

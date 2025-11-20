@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ################################################################################
-## fzfLauncher
+# fzfLauncher
 #
 # A fuzzy-launcher script for Wayland/Niri that can show:
 #   - current windows
@@ -487,6 +487,9 @@ apps_entries() {
           # Strip desktop file placeholders like %f, %u, etc.
           exec="$(printf '%s' "$exec" | sed -E 's/ *%[fFuUdDnNickvm]//g')"
 
+          terminal="$(grep -m1 -E '^Terminal=' "$desk" | sed 's/^Terminal=//' || false)"
+          [[ $terminal == "true" ]] && exec="$FZFLAUNCHER_TERMINAL -e $exec"
+
           printf "%s %s\t%s\n" "$icon" "$name" "$exec"
         done \
       | awk -F'\t' '!seen[$2]++'
@@ -510,7 +513,7 @@ apps_entries() {
 # If app caching is enabled, update the cache asynchronously after generating.
 if [[ "$FZFLAUNCHER_USE_APP_CACHE" == "true" ]]; then
   SET_APP_CACHE="$HOME/.config/fzfLauncher/set_app_cache.sh"
-  app_run "$SET_APP_CACHE \"$FZFLAUNCHER_APP_DIRS\" \"$FZFLAUNCHER_APP_CACHE\""
+  app_run "$SET_APP_CACHE \"$FZFLAUNCHER_APP_DIRS\" \"$FZFLAUNCHER_APP_CACHE\" \"$FZFLAUNCHER_TERMINAL\""
 fi
 
 # 2.1 Customs: user-defined commands loaded from FZFLAUNCHER_CUST_CMD_FILE.
@@ -791,16 +794,6 @@ pick_fzf_lines() {
 
 # --------------------- CLI DISPATCH ---------------------
 # Decide which generator to use based on MODE.
-# -------- Load entry generators from utils --------
-UTIL_DIR="$HOME/.config/fzfLauncher/utils"
-if [[ -d "$UTIL_DIR" ]]; then
-  for script in "$UTIL_DIR"/*.sh; do
-    # shellcheck source=/dev/null
-    source "$script"
-  done
-fi
-
-
 
 echo $MODE
 
@@ -812,7 +805,6 @@ case "$MODE" in
   sys)         GEN=sys_entries                TITLE="System"    ;;
   clipboard)   GEN=clipboard_entries          TITLE="Clipboard" ;;
   custom)      GEN=cust_entries               TITLE="Custom"    ;;
-  notcb)       GEN=notclipboard_entries       TITLE="All*"       ;;
   all)         GEN=all_entries                TITLE="All"       ;;
   *)
     # Safety net: unknown mode falls back to "all".
