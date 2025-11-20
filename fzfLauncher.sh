@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ################################################################################
-# fzfLauncher
+## fzfLauncher
 #
 # A fuzzy-launcher script for Wayland/Niri that can show:
 #   - current windows
@@ -791,6 +791,16 @@ pick_fzf_lines() {
 
 # --------------------- CLI DISPATCH ---------------------
 # Decide which generator to use based on MODE.
+# -------- Load entry generators from utils --------
+UTIL_DIR="$HOME/.config/fzfLauncher/utils"
+if [[ -d "$UTIL_DIR" ]]; then
+  for script in "$UTIL_DIR"/*.sh; do
+    # shellcheck source=/dev/null
+    source "$script"
+  done
+fi
+
+
 
 echo $MODE
 
