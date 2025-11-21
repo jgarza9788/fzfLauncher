@@ -12,6 +12,9 @@ FZFLAUNCHER_CUST_CMD_FILE="$HOME/.config/fzfLauncher/data/cust_cmds"
 FZFLAUNCHER_APP_DIRS="$HOME/.local/share/applications:/usr/share/applications:/var/lib/snapd/desktop/applications"
 FZFLAUNCHER_LOG_ENABLE=true
 
+# use nerdfont glyphs for windows in picker
+FZFLAUNCHER_WINDOW_GLYPHS=true
+
 # true if you want it to look nice
 # false if you want to see it loading
 FZFLAUNCHER_BUFFER_OPTS=true 

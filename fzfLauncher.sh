@@ -146,6 +146,8 @@ mkdir -p "$FZFLAUNCHER_DATA_DIR" "$FZFLAUNCHER_CACHE_DIR"
 : "${FZFLAUNCHER_WEB_APPS_FILE:="$FZFLAUNCHER_DATA_DIR/web_apps"}"
 : "${FZFLAUNCHER_APP_CACHE:="$FZFLAUNCHER_CACHE_DIR/app_cache"}"
 
+: "${FZFLAUNCHER_WINDOW_GLYPHS:=true}"
+
 : "${FZFLAUNCHER_NIRI_JUMP:=true}"
 
 : "${FZFLAUNCHER_USE_APP_CACHE:=true}"
@@ -189,8 +191,15 @@ log_truncate
 log "open"
 
 # Entry generators
+
 # shellcheck source=/dev/null
-source "$SCRIPT_DIR/entries/windows_entries.sh"
+
+if [[ "$FZFLAUNCHER_WINDOW_GLYPHS" == "true" ]]; then
+  source "$SCRIPT_DIR/entries/windows_alt_entries.sh"
+else
+  source "$SCRIPT_DIR/entries/windows_entries.sh"
+fi
+
 # shellcheck source=/dev/null
 source "$SCRIPT_DIR/entries/apps_entries.sh"
 # shellcheck source=/dev/null
