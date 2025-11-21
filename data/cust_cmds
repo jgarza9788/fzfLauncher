@@ -1,0 +1,5 @@
+code - configs	code ~/.config/
+files - configs	nautilus ~/.config/
+windows_only	~/.config/fzfLauncher/launchWindows.sh
+notification	swaync-client -t
+run_update	~/.config/niri/scripts/pkgupdate.sh
