@@ -45,6 +45,7 @@ echo "$workspaces" | jq -c 'sort_by(-.id)[]' | while read -r ws; do
     # echo "workspace: $ws"
 
 	id=$(jq -r '.id' <<< "$ws")
+	idx=$(jq -r '.idx' <<< "$ws")
 	# echo "$id"
 
 	fwswindows="$(printf '%s' "$windows" | jq --arg ws_id "$id" '
@@ -71,7 +72,7 @@ echo "$workspaces" | jq -c 'sort_by(-.id)[]' | while read -r ws; do
 		app_id=$(jq -r '.app_id' <<< "$win" || "unknown")
 		winid=$(jq -r '.id' <<< "$win" || "unknown")
 
-		text="$id | "
+		text="$idx | "
 		for i in $(seq 1 $fwcount); do
 			#if [[ "$focused" == "true" ]]; then 
 			if [[ "$i" == "$index" ]]; then 
@@ -114,7 +115,7 @@ echo "$workspaces" | jq -c 'sort_by(-.id)[]' | while read -r ws; do
 		app_id=$(jq -r '.app_id' <<< "$win" || "unknown")
 		winid=$(jq -r '.id' <<< "$win" || "unknown")
 
-		text="$id | "
+		text="$idx | "
 		for i in $(seq 1 $wcount); do
 			if [[ $i -eq $order ]]; then 
 				char="$ACTIVE"; 
