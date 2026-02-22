@@ -1,20 +1,57 @@
-# ~/.config/fzfLauncher/config.sh
+# ~/.config/fzfl/config
 
-# values in here will overwrite enything being passed in
+# fzfl config (bash-sourced)
 
-FZFLAUNCHER_TERMINAL="kitty"
-FZFLAUNCHER_SHELL="fish"
-FZFLAUNCHER_CUST_CMD_FILE="$HOME/.config/fzfLauncher/data/cust_cmds"
-FZFLAUNCHER_NIRI_JUMP=true
-FZFLAUNCHER_USE_APP_CACHE=true
-FZFLAUNCHER_APP_CACHE="$HOME/.config/fzfLauncher/cache/app_cache"
-FZFLAUNCHER_CUST_CMD_FILE="$HOME/.config/fzfLauncher/data/cust_cmds"
-FZFLAUNCHER_APP_DIRS="$HOME/.local/share/applications:/usr/share/applications:/var/lib/snapd/desktop/applications"
-FZFLAUNCHER_LOG_ENABLE=true
+# Terminal selection: kitty | gnome-terminal | alacritty
+FZFL_TERMINAL="kitty"
 
-# use nerdfont glyphs for windows in picker
-FZFLAUNCHER_WINDOW_GLYPHS=true
+# Terminal run templates (supports all three)
+# Use {cmd} placeholder; it will be replaced safely.
+FZFL_TERM_KITTY=(kitty --hold sh -lc "{cmd}")
+FZFL_TERM_GNOME=(gnome-terminal -- bash -lc "{cmd}")
+FZFL_TERM_ALACRITTY=(alacritty -e bash -lc "{cmd}")
 
-# true if you want it to look nice
-# false if you want to see it loading
-FZFLAUNCHER_BUFFER_OPTS=true 
+# Browser (default)
+FZFL_BROWSER="chromium"
+
+# Web launch mode: window | app
+# FZFL_WEB_MODE="window"
+FZFL_WEB_MODE="app"
+
+# Edit-before-run for HIST: 0/1
+FZFL_EDIT_BEFORE_RUN="0"
+
+# Caching (seconds)
+FZFL_CACHE_TTL_APPS=$((24*60*60*7))      # 7 days
+FZFL_CACHE_TTL_HISTORY=$((24*60*60*1))   # 1 day
+
+# Sources toggles
+FZFL_ENABLE_APPS="1"
+FZFL_ENABLE_WEB="1"
+FZFL_ENABLE_HIST="1"
+FZFL_ENABLE_CLIP="1"
+FZFL_ENABLE_WIN="1"
+
+
+#LABELS 
+FZFL_LABEL_APPS="󰀻 "
+FZFL_LABEL_WEB="󰖟 "
+FZFL_LABEL_WIN=" "
+FZFL_LABEL_CLIP="󰅎 "
+FZFL_LABEL_HIST="󰋚 "
+
+
+# FZFL_LABEL_APPS="[APP]"
+# FZFL_LABEL_WEB="[WEB]"
+# FZFL_LABEL_WIN="[WIN]"
+# FZFL_LABEL_CLIP="[CLP]"
+# FZFL_LABEL_HIST="[HIS]"
+
+
+FZFL_WIN_JUMP="1"
+
+FZFL_CLIP_MAX="250"
+
+
+# Optional: extra app dirs (colon-separated)
+FZFL_EXTRA_APP_DIRS=""
