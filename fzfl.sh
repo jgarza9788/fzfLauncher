@@ -186,8 +186,7 @@ term_run() {
   # In interactive shells, this prevents SIGHUP when the parent exits
   disown 2>/dev/null || true
 
-  # it takes bit of time to disown
-  sleep 0.1
+
 }
 
 
@@ -787,7 +786,9 @@ case "$type" in
     if [[ "$term" == "1" ]]; then
       term_run "$exec_cmd"
     else
-      nohup sh -lc "$exec_cmd" >/dev/null 2>&1 &
+      # nohup sh -lc "$exec_cmd" >/dev/null 2>&1 &
+      setsid -f sh -lc "$exec_cmd" </dev/null >/dev/null 2>&1 &
+      disown 2>/dev/null || true
     fi
     ;;
 
@@ -826,3 +827,6 @@ case "$type" in
     exit 1
     ;;
 esac
+
+# it takes bit of time to disown
+sleep 0.1
