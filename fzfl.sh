@@ -161,16 +161,19 @@ term_run() {
     [[ -n "${cmd//[[:space:]]/}" ]] || return 0
   fi
 
+  
+
+  local shell="${FZFL_SHELL:-bash}"
   local -a argv=()
   case "${FZFL_TERMINAL:-kitty}" in
     kitty)
-      argv=(kitty --hold sh -lc "$cmd")
+      argv=(kitty --hold "$shell" -ic "$cmd")
       ;;
     gnome-terminal)
-      argv=(gnome-terminal -- bash -lc "$cmd")
+      argv=(gnome-terminal -- "$shell" -ic "$cmd")
       ;;
     alacritty)
-      argv=(alacritty -e bash -lc "$cmd")
+      argv=(alacritty -e "$shell" -ic "$cmd")
       ;;
     *)
       echo "Unknown FZFL_TERMINAL=${FZFL_TERMINAL:-} (use kitty|gnome-terminal|alacritty)" >&2

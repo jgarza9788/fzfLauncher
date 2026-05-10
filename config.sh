@@ -5,14 +5,17 @@
 # Terminal selection: kitty | gnome-terminal | alacritty
 FZFL_TERMINAL="kitty"
 
+
 # Terminal run templates (supports all three)
 # Use {cmd} placeholder; it will be replaced safely.
-FZFL_TERM_KITTY=(kitty --hold sh -lc "{cmd}")
-FZFL_TERM_GNOME=(gnome-terminal -- bash -lc "{cmd}")
-FZFL_TERM_ALACRITTY=(alacritty -e bash -lc "{cmd}")
+#FZFL_TERM_KITTY=(kitty --hold sh -lc "{cmd}")
+#FZFL_TERM_KITTY=(kitty --hold zsh -lc "{cmd}")
+#FZFL_TERM_GNOME=(gnome-terminal -- bash -lc "{cmd}")
+#FZFL_TERM_ALACRITTY=(alacritty -e bash -lc "{cmd}")
 
 # Browser (default)
-FZFL_BROWSER="chromium"
+#FZFL_BROWSER="chromium"
+FZFL_BROWSER="chrome"
 
 # Web launch mode: window | app
 # FZFL_WEB_MODE="window"
